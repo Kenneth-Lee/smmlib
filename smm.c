@@ -1,11 +1,10 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 /* Simple Memory Memory (lib): A simple first fit memory algorithm */
 
-#include <stdint.h>
-#include <stddef.h>
+#include <assert.h>
 #include <stdbool.h>
 #include <errno.h>
-#include <assert.h>
+#include "smm.h"
 
 #define SMM_HEAD_TAG 0xE5E5
 #define SMMB_HEAD_FREE_TAG 0x5E5E
@@ -25,7 +24,7 @@ struct smm_head {
 	struct smmb_head *freelist;
 };
 
-static size_t __aligned_size(size_t sz, uint16_t align_mask)
+static size_t __aligned_size(size_t sz, int align_mask)
 {
 	return (sz + align_mask) ^ align_mask;
 }
