@@ -3,6 +3,7 @@
 #define __SMM_H
 
 #include <stddef.h>
+#include <stdint.h>
 
 extern int smm_init(void *pt_addr, size_t size, int align_mask);
 extern void *smm_alloc(void *pt_addr, size_t size);
@@ -12,5 +13,12 @@ extern void smm_free(void *pt_addr, void *ptr);
 extern void smm_dump(void *pt_addr);
 extern int smm_get_freeblock_num(void *pt_addr);
 #endif
+
+#ifdef DO_LOG_DEBUG
+#define DEBUG(fmt, ...) printf(fmt, ##__VA_ARGS__)
+#else
+#define DEBUG(fmt, ...)
+#endif
+
 
 #endif
